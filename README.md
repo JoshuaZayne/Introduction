@@ -15,7 +15,7 @@ My work centers on the **"Poacher-turned-Gamekeeper"** philosophy: utilizing a d
 
 ### 1. Systematic Portfolio Architecture
 **Production-grade MPT implementation for institutional-scale mandates.**
-A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-based covariance estimation to handle $500B+ AUM frameworks with minimal tracking error.
+A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-based covariance estimation to handle $500M+ AUM frameworks with minimal tracking error.
 
 **[📂 View Portfolio Optimization Library](https://github.com/JoshuaZayne/Efficient_Frontier)**
 
