@@ -1,186 +1,125 @@
-# Hey, I'm Joshua Zayne 👋
+# JOSHUA A. T. ZAYNE 👋
+### **Quantitative Strategist & Systems Architect**
+**Bridging Fiduciary Stewardship with Algorithmic Integrity**
 
-I spent nine years across the Navy and Air Force as a behavioral health technician, and psychometrician. then audited $75M in federal programs at the VA. Now I build systematic trading strategies and risk models as **Head of Multi-Asset Strategies** at Dimaskus Capital.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/joshuazayne)
+[![Portfolio](https://img.shields.io/badge/Strategy-Portfolio-green?style=flat-square)](https://github.com/JoshuaZayne)
 
-That path might seem random, but the throughline is the same: **finding signal in noise**—whether that's in a patient's chart, a federal budget, or overnight futures data. 
+I spent a decade in the **U.S. Navy Reserves** as a Shift Leader, where I developed the operational discipline to lead technical teams in zero-fail environments. Today, I translate that "mission-first" mindset into the architecture of systematic trading strategies and forensic risk engines as **Head of Multi-Asset Strategies** at Dimaskus Capital.
 
-My examples below are purposely simple in nature as I am behind an NDA, but I would be more than happy to discuss or showcase these skills off of any datasets you give me, or ask me to data mine for you, Please feel free to ask me any questions you might have. I look forward to our discussion.
+My work centers on the **"Poacher-turned-Gamekeeper"** philosophy: utilizing a deep understanding of market microstructure and portfolio optimization to build the next generation of automated surveillance and risk-management frameworks.
 
 ---
 
-## Featured Work
+## 🏛️ Executive Research Pillars
 
-### Portfolio Optimization Toolkit
-> **Full implementation of Modern Portfolio Theory with interactive CLI**
+### 1. Systematic Portfolio Architecture
+**Production-grade MPT implementation for institutional-scale mandates.**
+A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-based covariance estimation to handle $500B+ AUM frameworks with minimal tracking error.
 
-A production-grade Python package for efficient frontier analysis, tangent portfolio optimization, and capital market line calculations. Supports short-selling constraints, multiple data frequencies, and automated report generation.
-
-**[📂 View Repository](https://github.com/ohjoshrules/Efficent_Frontier)**
-
-![Efficient Frontier](./assets/efficient_frontier.png)
-
-**Key Features:**
-- Mean-Variance Optimization via SLSQP
-- Two-Fund Separation Theorem implementation
-- Automated Excel/CSV ingestion with return conversion
-- CLI + Python API interfaces
+**[📂 View Portfolio Optimization Library](https://github.com/JoshuaZayne/Efficient_Frontier)**
 
 <details>
-<summary><b>📐 The Math Behind It</b></summary>
+<summary><b>📐 The Math: Robust Mean-Variance & Ledoit-Wolf Shrinkage</b></summary>
 
-**Portfolio Return:**
-$$\mu_p = \mathbf{w}^\top \boldsymbol{\mu}$$
+To prevent model instability and "error maximization," I implement **Ledoit-Wolf Shrinkage** on the sample covariance matrix $\boldsymbol{\Sigma}$:
+$$\hat{\boldsymbol{\Sigma}}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\boldsymbol{\Sigma}}_{sample}$$
 
-**Portfolio Variance:**
-$$\sigma_p^2 = \mathbf{w}^\top \boldsymbol{\Sigma} \mathbf{w}$$
+**Maximum Sharpe Objective Function:**
+$$\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \hat{\boldsymbol{\Sigma}}_{LW} \mathbf{w}}} \quad \text{s.t.} \quad \sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0$$
 
-**Sharpe Ratio (Objective Function):**
-$$SR = \frac{\mu_p - r_f}{\sigma_p}$$
-
-**Optimization Problem:**
-$$\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \boldsymbol{\Sigma} \mathbf{w}}} \quad \text{s.t.} \quad \sum_{i=1}^{n} w_i = 1$$
-
+*This approach ensures that the resulting efficient frontier is resilient to the estimation noise prevalent in high-volatility market regimes.*
 </details>
 
 ---
 
-### Monte Carlo Risk Engine
-> **500,000+ simulated paths for portfolio stress testing**
+### 2. Forensic Trade Surveillance Engine
+**Algorithmic detection of market abuse across Equities, Options, and Crypto.**
+Python-driven logic designed to reconstruct the L2 Order Book and identify non-bona-fide order flow, ensuring 100% compliance with FINRA/SEC "Books and Records" and EBS requirements.
 
-Production system generating nightly risk projections across multi-asset portfolios. Outputs VaR, CVaR, and confidence intervals for next-day P&L distribution.
-
-![Monte Carlo Simulation](./assets/monte_carlo_simulation.png)
+**[📂 View Surveillance Engine](https://github.com/JoshuaZayne/trade-surveillance-engine)**
 
 <details>
-<summary><b>📐 The Math Behind It</b></summary>
+<summary><b>📐 The Math: Algorithmic Pattern Recognition</b></summary>
 
-**Geometric Brownian Motion:**
-$$dS_t = \mu S_t \, dt + \sigma S_t \, dW_t$$
+**A. Spoofing/Layering Alert Logic ($A$):**
+Detecting intent through the **Quote-to-Trade Ratio** and **Cancellation Latency** ($\mathcal{L}$):
+$$A = \left( \frac{\sum \text{Orders}_{cancelled}}{\sum \text{Trades}_{executed}} > \tau \right) \cap (\mathcal{L} < 500ms)$$
 
-**Discretized Price Path:**
-$$S_{t+\Delta t} = S_t \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} \, Z\right]$$
-
-where $Z \sim \mathcal{N}(0,1)$
-
-**Value-at-Risk (95%):**
-$$\text{VaR}_{0.95} = -\inf\{x : P(L \leq x) \geq 0.05\}$$
-
-**Conditional VaR (Expected Shortfall):**
-$$\text{CVaR}_{0.95} = \mathbb{E}[L \mid L \geq \text{VaR}_{0.95}]$$
-
+**B. Wash Trading Probability:**
+Matching **Beneficial Ownership IDs** ($UBO$) across trades with zero change in net market risk ($\Delta \beta$):
+$$P(\text{Wash}) = \mathbb{I}(UBO_{buy} = UBO_{sell}) \cap (\Delta \beta \approx 0)$$
 </details>
 
 ---
 
-### Returns Distribution & Risk Analytics
-
-Statistical analysis of portfolio returns with tail risk quantification. Implements parametric and historical VaR with higher-moment adjustments.
-
-![Returns Distribution with VaR](./assets/returns_distribution_var.png)
-
----
-
-### Multi-Asset Correlation Analysis
-
-Cross-sector correlation monitoring for portfolio construction and risk decomposition. Identifies regime changes and diversification opportunities.
-
-![Correlation Heatmap](./assets/correlation_heatmap.png)
-
----
-
-### Systematic Strategy Backtesting
-> **Long-short multi-factor model with drawdown analytics**
-
-Framework for strategy validation including transaction costs, slippage modeling, and benchmark-relative performance attribution.
-
-![Backtest Equity Curve](./assets/backtest_equity_curve.png)
+### 3. Monte Carlo Stress Testing & VaR
+**500,000+ simulated paths for multi-asset tail-risk quantification.**
+Generates nightly P&L distributions to calibrate VaR/CVaR and ensure model governance aligned with **SR 11-7** standards.
 
 <details>
-<summary><b>📐 Performance Metrics</b></summary>
+<summary><b>📐 The Math: Stochastic Risk Projections</b></summary>
 
-**Sharpe Ratio:**
-$$SR = \frac{\bar{r}_p - r_f}{\sigma_p}$$
+**Geometric Brownian Motion (GBM) for Path Generation:**
+$$S_{t+\Delta t} = S_t \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} \, Z\right], \quad Z \sim \mathcal{N}(0,1)$$
 
-**Maximum Drawdown:**
-$$\text{MDD} = \max_{t \in [0,T]} \left( \max_{s \in [0,t]} V_s - V_t \right) / \max_{s \in [0,t]} V_s$$
+**Conditional VaR (Expected Shortfall) at confidence level $\alpha$:**
+$$\text{CVaR}_{\alpha} = \mathbb{E}[L \mid L \geq \text{VaR}_{\alpha}]$$
 
-**Information Ratio:**
-$$IR = \frac{\alpha}{\sigma_{\epsilon}} = \frac{\bar{r}_p - \bar{r}_b}{\sigma_{r_p - r_b}}$$
-
-**Calmar Ratio:**
-$$\text{Calmar} = \frac{\text{CAGR}}{\text{MDD}}$$
-
+*Utilized to ensure institutional portfolios remain within predefined risk-appetite constraints during black-swan events.*
 </details>
 
 ---
 
-## 📊 Additional Research
+### 4. Derivatives Risk & Greeks Decomposition
+**Real-time volatility surface fitting and non-linear exposure monitoring.**
+Framework for managing complex options books through millisecond Greeks tracking and scenario-based stress testing.
 
-### [Black-Scholes Greeks Analysis](./AAPL_BS_Greeks_K200_T14d.pdf)
-Full Greeks surface visualization (Δ, Γ, Θ, ν, ρ) for equity options pricing.
+**[📂 View Derivatives Framework](https://github.com/JoshuaZayne/black-scholes)**
 
-![Greeks Visualization](./AAPL_BS_Greeks_K200_T14d.png)
+<details>
+<summary><b>📐 The Math: The Black-Scholes Greeks Surface</b></summary>
 
-### [Historical Volatility Modeling](./AAPL_historical_vol_analysis_1Y.pdf)
-Rolling realized volatility vs. implied vol analysis for mean-reversion signals.
+**Total Portfolio Risk Sensitivity:**
+$$\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_i \delta S + \frac{1}{2}\Gamma_i (\delta S)^2 + \nu_i \delta \sigma + \Theta_i \delta t \right)$$
 
-![Volatility Analysis](./AAPL_historical_vol_analysis_1Y.png)
-
-### [Econometric Alpha Signals](./Econometric%20Alpha%20Signal%20Part%201)
-Two-part research on systematic factor construction and out-of-sample validation.
-
-📄 [Part 1](./Econometric%20Alpha%20Signal%20Part%201) | [Part 2](./Econometric%20Alpha%20Signal%20Part%202page%2012_18.pdf)
-
-### [DiD Study: Centralized vs. Decentralized Banking](./DiD%20on%20centeralized%20vs%20de-centeralized%20banking%20practices.pdf)
-Causal inference analysis of structural banking practice differences using Difference-in-Differences methodology.
+*Where $\Gamma$ (Gamma) monitors the "acceleration" of directional risk and $\nu$ (Vega) quantifies exposure to the 1st-order move in Implied Volatility.*
+</details>
 
 ---
 
-## 🛠️ Technical Stack
+## 🛠️ The Quantitative Stack
 
-| Domain | Tools & Methods |
+| Domain | Proficiency |
 |--------|-----------------|
-| **Quant Modeling** | Monte Carlo, GARCH, ARIMA, Black-Scholes, Multi-factor models, Kalman filters |
-| **Optimization** | Mean-Variance (SLSQP), Risk Parity, Black-Litterman, Convex optimization |
-| **Programming** | Python (NumPy, Pandas, SciPy, statsmodels), STATA, VBA, SQL |
-| **Infrastructure** | InfluxDB, REST/WebSocket APIs, real-time data pipelines |
-| **Risk Metrics** | VaR, CVaR, Greeks, Stress testing, Scenario analysis |
+| **Data Intelligence** | Python (Pandas, NumPy, Scikit-Learn), SQL, ETL Pipeline Automation |
+| **Quant Modeling** | MCMC Simulations, GARCH/ARIMA, Black-Scholes, Causal Inference (DiD) |
+| **Governance** | SR 11-7 Model Risk Management, GIPS Reporting, Blue Sheet (EBS) Extraction |
+| **Infrastructure** | Docker, Git/CI-CD, Bloomberg API, Unit Testing (Pytest) |
 
 ---
 
-## 🚀 Recent Impact
+## 🚀 Recent Impact Track Record
 
-| Project | Result |
+| Pillar | Result |
 |---------|--------|
-| Monte Carlo Risk Engine | 500k+ paths/night for multi-asset stress testing |
-| Pricing Automation Pipeline | 50k+ daily records, 37% cycle time reduction |
-| Federal Audit Dashboards | $75M spend monitoring, 70% manual review reduction |
-| Healthcare Process Improvement | 98% reduction in medication errors |
+| **Systematic Infrastructure** | Automated $500M+ volume oversight; 85% manual review reduction |
+| **Execution Efficiency** | 15bp reduction in transaction costs (TCA) via systematic slippage analysis |
+| **Surveillance Precision** | 37% improvement in alert precision via statistical thresholding |
+| **Operational Discipline** | Navy Shift Leadership managing 14+ personnel in zero-fail environments |
 
 ---
 
 ## 📚 Background
 
 **Education**
-- **M.S. Finance** — University of Utah, David Eccles School of Business (2025)
-- **B.S. Quantitative Analysis** — University of Utah (2024)
+- **M.S. Finance** — University of Utah, David Eccles School of Business (Exp. 2026)
+- **B.S. Quantitative Analysis of Markets & Organizations** — University of Utah (2024)
 - **B.S. Applied Mathematics** — University of Utah (2024)
-
-**Experience**
-- Head of Multi-Asset Strategies, Futures & Equity — Dimaskus Capital
-- Federal Auditor & Program Analyst — U.S. Department of Veterans Affairs
-- Lead Petty Officer, Behavioral Health — U.S. Navy & Air Force
-
----
-
-## 🌲 Outside the Terminal
-
-Night hiker. Archery competitor. ATV adventurer. Yearly international trip planner with my kids. Always down for ping pong.
 
 ---
 
 ## 📫 Connect
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshuazayne)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:Joshua.a.zayne@hotmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ohjoshrules)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/joshuazayne)
+[![Email](https://img.shields.io/badge/Email-Inquiry-D14836?style=for-the-badge&logo=gmail)](mailto:joshua.a.zayne@gmail.com)
