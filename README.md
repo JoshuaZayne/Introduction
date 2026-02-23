@@ -1,48 +1,39 @@
 # JOSHUA A. T. ZAYNE 👋
-### **Quantitative Strategist & Systems Architect**
-**Bridging Fiduciary Stewardship with Algorithmic Integrity**
+### **Head of Multi-Asset Strategies & Systems Architect**
+**11 Years of Institutional Quantitative Leadership**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/joshuazayne)
 [![Portfolio](https://img.shields.io/badge/Strategy-Portfolio-green?style=flat-square)](https://github.com/JoshuaZayne)
 
-I spent a decade in the **U.S. Navy Reserves** as a Shift Leader, developing the operational discipline required to lead technical teams in zero-fail environments. Today, I translate that "mission-first" mindset into the architecture of systematic trading strategies and forensic risk engines as **Head of Multi-Asset Strategies** at Dimaskus Capital.
+For the past 11 years at **Dimaskus Capital**, I have spearheaded the evolution of our systematic trading and risk infrastructure. My tenure is defined by a transition from a dedicated Quantitative Researcher to the **Head of Multi-Asset Strategies**, where I architect the frameworks that govern our $500M+ multi-asset mandates.
 
-My work centers on the **"Poacher-turned-Gamekeeper"** philosophy: utilizing a deep understanding of market microstructure and portfolio optimization to build the next generation of automated surveillance and risk-management frameworks.
+My approach is built on a foundation of **Navy Operational Discipline**. As a former Shift Leader, I translate the "mission-first" mindset into production-grade code, ensuring that every basis point of alpha is generated within a rigorous, audit-ready, and risk-controlled environment.
 
 ---
 
-## 🏛️ Executive Research Pillars
+## 🏛️ Institutional Research Pillars
 
 ### 1. Systematic Portfolio Architecture
 **Production-grade MPT implementation for institutional-scale mandates.**
-A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-based covariance estimation to handle $500M+ AUM frameworks with minimal tracking error.
+A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-based covariance estimation to handle institutional frameworks with minimal tracking error.
 
 **[📂 View Portfolio Optimization Library](https://github.com/JoshuaZayne/Efficient_Frontier)**
 
 <details>
-<summary><b>📐 The Math: Robust Mean-Variance & Ledoit-Wolf Shrinkage</b></summary>
+<summary><b>📐 View Math: Robust Mean-Variance & Shrinkage</b></summary>
 
-<br>
+To prevent model instability, I implement **Ledoit-Wolf Shrinkage** on the sample covariance matrix:
 
-$$
-\hat{\Sigma}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\Sigma}_{\text{sample}}
-$$
+$$ \hat{\Sigma}_{LW} = \delta F + (1 - \delta) \hat{\Sigma}_{sample} $$
 
 **Maximum Sharpe Objective Function:**
 
-$$
-\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \hat{\Sigma}_{LW} \mathbf{w}}}
-$$
+$$ \max_{w} \frac{w^{T} \mu - r_{f}}{\sqrt{w^{T} \hat{\Sigma}_{LW} w}} $$
 
 **Subject to Constraints:**
 
-$$
-\sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0
-$$
+$$ \sum_{i=1}^{n} w_{i} = 1, \quad w \geq 0 $$
 
-<br>
-
-*This approach ensures that the resulting efficient frontier is resilient to the estimation noise prevalent in high-volatility market regimes.*
 </details>
 
 ---
@@ -54,25 +45,18 @@ Python-driven logic designed to reconstruct the L2 Order Book and identify non-b
 **[📂 View Surveillance Engine](https://github.com/JoshuaZayne/trade-surveillance-engine)**
 
 <details>
-<summary><b>📐 The Math: Algorithmic Pattern Recognition</b></summary>
+<summary><b>📐 View Math: Algorithmic Pattern Recognition</b></summary>
 
-<br>
+**A. Spoofing/Layering Alert Logic (A):**
+Detecting intent through the **Quote-to-Trade Ratio** and **Cancellation Latency** (L):
 
-**A. Spoofing/Layering Alert Logic ($A$):**
-Detecting intent through the **Quote-to-Trade Ratio** and **Cancellation Latency** ($\mathcal{L}$):
-
-$$
-A = \left( \frac{\sum \text{Orders}_{\text{cancelled}}}{\sum \text{Trades}_{\text{executed}}} > \tau \right) \cap (\mathcal{L} < 500\text{ms})
-$$
+$$ A = \left( \frac{\sum Orders_{cancelled}}{\sum Trades_{executed}} > \tau \right) \cap (L < 500ms) $$
 
 **B. Wash Trading Probability:**
-Matching **Beneficial Ownership IDs** ($UBO$) across trades with zero change in net market risk ($\Delta \beta$):
+Matching **Beneficial Ownership IDs** (UBO) across trades with zero change in net market risk:
 
-$$
-P(\text{Wash}) = \mathbb{I}(UBO_{\text{buy}} = UBO_{\text{sell}}) \cap (\Delta \beta \approx 0)
-$$
+$$ P(Wash) = \mathbb{I}(UBO_{buy} = UBO_{sell}) \cap (\Delta \beta \approx 0) $$
 
-<br>
 </details>
 
 ---
@@ -82,49 +66,35 @@ $$
 Generates nightly P&L distributions to calibrate VaR/CVaR and ensure model governance aligned with **SR 11-7** standards.
 
 <details>
-<summary><b>📐 The Math: Stochastic Risk Projections</b></summary>
-
-<br>
+<summary><b>📐 View Math: Stochastic Risk Projections</b></summary>
 
 **Geometric Brownian Motion (GBM) for Path Generation:**
 
-$$
-S_{t+\Delta t} = S_t \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} \, Z\right], \quad Z \sim \mathcal{N}(0,1)
-$$
+$$ S_{t+\Delta t} = S_{t} \exp\left[ \left( \mu - \frac{\sigma^{2}}{2} \right) \Delta t + \sigma \sqrt{\Delta t} Z \right] $$
 
-**Conditional VaR (Expected Shortfall) at confidence level $\alpha$:**
+**Conditional VaR (Expected Shortfall) at confidence level alpha:**
 
-$$
-\text{CVaR}_{\alpha} = \mathbb{E}[L \mid L \geq \text{VaR}_{\alpha}]
-$$
+$$ CVaR_{\alpha} = \mathbb{E}[ L \mid L \geq VaR_{\alpha} ] $$
 
-<br>
-
-*Utilized to ensure institutional portfolios remain within predefined risk-appetite constraints during black-swan events.*
 </details>
 
 ---
 
 ### 4. Derivatives Risk & Greeks Decomposition
 **Real-time volatility surface fitting and non-linear exposure monitoring.**
-Framework for managing complex options books through millisecond Greeks tracking and scenario-based stress testing.
+Framework for managing complex options books through Greeks tracking and scenario-based stress testing.
 
 **[📂 View Derivatives Framework](https://github.com/JoshuaZayne/black-scholes)**
 
 <details>
-<summary><b>📐 The Math: The Black-Scholes Greeks Surface</b></summary>
+<summary><b>📐 View Math: Total Portfolio Risk Sensitivity</b></summary>
 
-<br>
+To manage non-linear exposures, I decompose portfolio risk across the Greeks surface:
 
-**Total Portfolio Risk Sensitivity:**
+$$ \Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_{i} \delta S + \frac{1}{2} \Gamma_{i} (\delta S)^{2} + \nu_{i} \delta \sigma + \Theta_{i} \delta t \right) $$
 
-$$
-\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_{i} \delta S + \frac{1}{2}\Gamma_{i} (\delta S)^2 + \nu_{i} \delta \sigma + \Theta_{i} \delta t \right)
-$$
+Where **Gamma** captures the acceleration of directional risk and **Vega** quantifies exposure to Implied Volatility shifts.
 
-<br>
-
-Where $\Gamma$ captures the "acceleration" of directional risk and $\nu$ quantifies exposure to the 1st-order move in Implied Volatility.
 </details>
 
 ---
@@ -140,13 +110,13 @@ Where $\Gamma$ captures the "acceleration" of directional risk and $\nu$ quantif
 
 ---
 
-## 🚀 Recent Impact Track Record
+## 🚀 Impact Track Record
 
 | Pillar | Result |
 |---------|--------|
-| **Systematic Infrastructure** | Automated $500M+ volume oversight; 85% manual review reduction |
+| **Dimaskus Tenure** | 11 years evolving from Quantitative Researcher to Head of Multi-Asset Strategies |
+| **Systematic Infra** | Automated $500M+ volume oversight; 85% manual review reduction |
 | **Execution Efficiency** | 15bp reduction in transaction costs (TCA) via systematic slippage analysis |
-| **Surveillance Precision** | 37% improvement in alert precision via statistical thresholding |
 | **Operational Discipline** | Navy Shift Leadership managing 14+ personnel in zero-fail environments |
 
 ---
