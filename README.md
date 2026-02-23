@@ -5,7 +5,7 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/joshuazayne)
 [![Portfolio](https://img.shields.io/badge/Strategy-Portfolio-green?style=flat-square)](https://github.com/JoshuaZayne)
 
-I spent a decade in the **U.S. Navy Reserves** as a Shift Leader, where I developed the operational discipline to lead technical teams in zero-fail environments. Today, I translate that "mission-first" mindset into the architecture of systematic trading strategies and forensic risk engines as **Head of Multi-Asset Strategies** at Dimaskus Capital.
+I spent a decade in the **U.S. Navy Reserves** as a Shift Leader, developing the operational discipline required to lead technical teams in zero-fail environments. Today, I translate that "mission-first" mindset into the architecture of systematic trading strategies and forensic risk engines as **Head of Multi-Asset Strategies** at Dimaskus Capital.
 
 My work centers on the **"Poacher-turned-Gamekeeper"** philosophy: utilizing a deep understanding of market microstructure and portfolio optimization to build the next generation of automated surveillance and risk-management frameworks.
 
@@ -22,11 +22,17 @@ A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-
 <details>
 <summary><b>📐 The Math: Robust Mean-Variance & Ledoit-Wolf Shrinkage</b></summary>
 
-To prevent model instability and "error maximization," I implement **Ledoit-Wolf Shrinkage** on the sample covariance matrix $\boldsymbol{\Sigma}$:
-$$\hat{\boldsymbol{\Sigma}}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\boldsymbol{\Sigma}}_{sample}$$
+To prevent model instability and "error maximization," I implement **Ledoit-Wolf Shrinkage** on the sample covariance matrix:
+
+$$\hat{\Sigma}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\Sigma}_{sample}$$
 
 **Maximum Sharpe Objective Function:**
-$$\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \hat{\boldsymbol{\Sigma}}_{LW} \mathbf{w}}} \quad \text{s.t.} \quad \sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0$$
+
+$$\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \hat{\Sigma}_{LW} \mathbf{w}}}$$
+
+**Subject to Constraints:**
+
+$$\sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0$$
 
 *This approach ensures that the resulting efficient frontier is resilient to the estimation noise prevalent in high-volatility market regimes.*
 </details>
@@ -44,10 +50,12 @@ Python-driven logic designed to reconstruct the L2 Order Book and identify non-b
 
 **A. Spoofing/Layering Alert Logic ($A$):**
 Detecting intent through the **Quote-to-Trade Ratio** and **Cancellation Latency** ($\mathcal{L}$):
+
 $$A = \left( \frac{\sum \text{Orders}_{cancelled}}{\sum \text{Trades}_{executed}} > \tau \right) \cap (\mathcal{L} < 500ms)$$
 
 **B. Wash Trading Probability:**
 Matching **Beneficial Ownership IDs** ($UBO$) across trades with zero change in net market risk ($\Delta \beta$):
+
 $$P(\text{Wash}) = \mathbb{I}(UBO_{buy} = UBO_{sell}) \cap (\Delta \beta \approx 0)$$
 </details>
 
@@ -61,9 +69,11 @@ Generates nightly P&L distributions to calibrate VaR/CVaR and ensure model gover
 <summary><b>📐 The Math: Stochastic Risk Projections</b></summary>
 
 **Geometric Brownian Motion (GBM) for Path Generation:**
+
 $$S_{t+\Delta t} = S_t \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} \, Z\right], \quad Z \sim \mathcal{N}(0,1)$$
 
 **Conditional VaR (Expected Shortfall) at confidence level $\alpha$:**
+
 $$\text{CVaR}_{\alpha} = \mathbb{E}[L \mid L \geq \text{VaR}_{\alpha}]$$
 
 *Utilized to ensure institutional portfolios remain within predefined risk-appetite constraints during black-swan events.*
@@ -81,9 +91,10 @@ Framework for managing complex options books through millisecond Greeks tracking
 <summary><b>📐 The Math: The Black-Scholes Greeks Surface</b></summary>
 
 **Total Portfolio Risk Sensitivity:**
+
 $$\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_i \delta S + \frac{1}{2}\Gamma_i (\delta S)^2 + \nu_i \delta \sigma + \Theta_i \delta t \right)$$
 
-*Where $\Gamma$ (Gamma) monitors the "acceleration" of directional risk and $\nu$ (Vega) quantifies exposure to the 1st-order move in Implied Volatility.*
+*Where $\Gamma$ captures the "acceleration" of directional risk and $\nu$ quantifies exposure to the 1st-order move in Implied Volatility.*
 </details>
 
 ---
