@@ -22,7 +22,7 @@ A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-
 <details>
 <summary><b>📐 The Math: Robust Mean-Variance & Ledoit-Wolf Shrinkage</b></summary>
 
-To prevent model instability and "error maximization," I implement **Ledoit-Wolf Shrinkage** on the sample covariance matrix:
+<br>
 
 $$
 \hat{\Sigma}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\Sigma}_{\text{sample}}
@@ -40,6 +40,8 @@ $$
 \sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0
 $$
 
+<br>
+
 *This approach ensures that the resulting efficient frontier is resilient to the estimation noise prevalent in high-volatility market regimes.*
 </details>
 
@@ -54,6 +56,8 @@ Python-driven logic designed to reconstruct the L2 Order Book and identify non-b
 <details>
 <summary><b>📐 The Math: Algorithmic Pattern Recognition</b></summary>
 
+<br>
+
 **A. Spoofing/Layering Alert Logic ($A$):**
 Detecting intent through the **Quote-to-Trade Ratio** and **Cancellation Latency** ($\mathcal{L}$):
 
@@ -67,6 +71,8 @@ Matching **Beneficial Ownership IDs** ($UBO$) across trades with zero change in 
 $$
 P(\text{Wash}) = \mathbb{I}(UBO_{\text{buy}} = UBO_{\text{sell}}) \cap (\Delta \beta \approx 0)
 $$
+
+<br>
 </details>
 
 ---
@@ -77,6 +83,8 @@ Generates nightly P&L distributions to calibrate VaR/CVaR and ensure model gover
 
 <details>
 <summary><b>📐 The Math: Stochastic Risk Projections</b></summary>
+
+<br>
 
 **Geometric Brownian Motion (GBM) for Path Generation:**
 
@@ -89,6 +97,8 @@ $$
 $$
 \text{CVaR}_{\alpha} = \mathbb{E}[L \mid L \geq \text{VaR}_{\alpha}]
 $$
+
+<br>
 
 *Utilized to ensure institutional portfolios remain within predefined risk-appetite constraints during black-swan events.*
 </details>
@@ -104,11 +114,15 @@ Framework for managing complex options books through millisecond Greeks tracking
 <details>
 <summary><b>📐 The Math: The Black-Scholes Greeks Surface</b></summary>
 
+<br>
+
 **Total Portfolio Risk Sensitivity:**
 
 $$
-\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_i \delta S + \frac{1}{2}\Gamma_i (\delta S)^2 + \nu_i \delta \sigma + \Theta_i \delta t \right)
+\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_{i} \delta S + \frac{1}{2}\Gamma_{i} (\delta S)^2 + \nu_{i} \delta \sigma + \Theta_{i} \delta t \right)
 $$
+
+<br>
 
 Where $\Gamma$ captures the "acceleration" of directional risk and $\nu$ quantifies exposure to the 1st-order move in Implied Volatility.
 </details>
