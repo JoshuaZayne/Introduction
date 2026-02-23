@@ -24,15 +24,21 @@ A scalable Python toolkit for multi-objective optimization, utilizing shrinkage-
 
 To prevent model instability and "error maximization," I implement **Ledoit-Wolf Shrinkage** on the sample covariance matrix:
 
-$$\hat{\Sigma}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\Sigma}_{sample}$$
+$$
+\hat{\Sigma}_{LW} = \delta \mathbf{F} + (1-\delta) \hat{\Sigma}_{\text{sample}}
+$$
 
 **Maximum Sharpe Objective Function:**
 
-$$\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \hat{\Sigma}_{LW} \mathbf{w}}}$$
+$$
+\max_{\mathbf{w}} \frac{\mathbf{w}^\top \boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top \hat{\Sigma}_{LW} \mathbf{w}}}
+$$
 
 **Subject to Constraints:**
 
-$$\sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0$$
+$$
+\sum_{i=1}^{n} w_i = 1, \quad \mathbf{w} \geq 0
+$$
 
 *This approach ensures that the resulting efficient frontier is resilient to the estimation noise prevalent in high-volatility market regimes.*
 </details>
@@ -51,12 +57,16 @@ Python-driven logic designed to reconstruct the L2 Order Book and identify non-b
 **A. Spoofing/Layering Alert Logic ($A$):**
 Detecting intent through the **Quote-to-Trade Ratio** and **Cancellation Latency** ($\mathcal{L}$):
 
-$$A = \left( \frac{\sum \text{Orders}_{cancelled}}{\sum \text{Trades}_{executed}} > \tau \right) \cap (\mathcal{L} < 500ms)$$
+$$
+A = \left( \frac{\sum \text{Orders}_{\text{cancelled}}}{\sum \text{Trades}_{\text{executed}}} > \tau \right) \cap (\mathcal{L} < 500\text{ms})
+$$
 
 **B. Wash Trading Probability:**
 Matching **Beneficial Ownership IDs** ($UBO$) across trades with zero change in net market risk ($\Delta \beta$):
 
-$$P(\text{Wash}) = \mathbb{I}(UBO_{buy} = UBO_{sell}) \cap (\Delta \beta \approx 0)$$
+$$
+P(\text{Wash}) = \mathbb{I}(UBO_{\text{buy}} = UBO_{\text{sell}}) \cap (\Delta \beta \approx 0)
+$$
 </details>
 
 ---
@@ -70,11 +80,15 @@ Generates nightly P&L distributions to calibrate VaR/CVaR and ensure model gover
 
 **Geometric Brownian Motion (GBM) for Path Generation:**
 
-$$S_{t+\Delta t} = S_t \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} \, Z\right], \quad Z \sim \mathcal{N}(0,1)$$
+$$
+S_{t+\Delta t} = S_t \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)\Delta t + \sigma \sqrt{\Delta t} \, Z\right], \quad Z \sim \mathcal{N}(0,1)
+$$
 
 **Conditional VaR (Expected Shortfall) at confidence level $\alpha$:**
 
-$$\text{CVaR}_{\alpha} = \mathbb{E}[L \mid L \geq \text{VaR}_{\alpha}]$$
+$$
+\text{CVaR}_{\alpha} = \mathbb{E}[L \mid L \geq \text{VaR}_{\alpha}]
+$$
 
 *Utilized to ensure institutional portfolios remain within predefined risk-appetite constraints during black-swan events.*
 </details>
@@ -92,9 +106,11 @@ Framework for managing complex options books through millisecond Greeks tracking
 
 **Total Portfolio Risk Sensitivity:**
 
-$$\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_i \delta S + \frac{1}{2}\Gamma_i (\delta S)^2 + \nu_i \delta \sigma + \Theta_i \delta t \right)$$
+$$
+\Delta \Pi \approx \sum_{i=1}^{n} \left( \Delta_i \delta S + \frac{1}{2}\Gamma_i (\delta S)^2 + \nu_i \delta \sigma + \Theta_i \delta t \right)
+$$
 
-*Where $\Gamma$ captures the "acceleration" of directional risk and $\nu$ quantifies exposure to the 1st-order move in Implied Volatility.*
+Where $\Gamma$ captures the "acceleration" of directional risk and $\nu$ quantifies exposure to the 1st-order move in Implied Volatility.
 </details>
 
 ---
